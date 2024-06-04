@@ -51,7 +51,7 @@ if __name__ == "__main__":
         
         trainer = Trainer(model, dataset, args.model_path)
         trainer.train_gmm(gmm_samples=args.gmm_samples, n_comp=args.gmm_comp)
-        trainer.train(args.n_epoch, args.bs, args.lr, args.weight_decay)
+        trainer.train(args.n_epoch, args.bs, args.lr)
         model.eval()    
         torch.save(model, join(args.model_path, f"{args.model_name}.pth"))
         
@@ -67,7 +67,7 @@ if __name__ == "__main__":
         destroyer = restorer.destroyer
         model = Planner(dataset.G, dataset.A, restorer, destroyer, device, x_emb_dim=args.x_emb_dim, pretrain_path=pretrain_path)
         trainer = Trainer(model, dataset, device, args.model_path)
-        trainer.train(args.n_epoch, args.bs, args.lr, args.weight_decay)
+        trainer.train(args.n_epoch, args.bs, args.lr)
         model.eval()
         torch.save(model, join(args.model_path, f"{args.model_name}.pth"))
         
